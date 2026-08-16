@@ -18,7 +18,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    let errorMessage = 'Internal server error';
+    let errorMessage = 'A server error has occurred';
 
     if (exception instanceof HttpException) {
       const res = exception.getResponse();
@@ -32,11 +32,16 @@ export class AllExceptionsFilter implements ExceptionFilter {
           ? msg
           : JSON.stringify(msg);
       }
-    } else if (exception instanceof Error) {
-      errorMessage = exception.message;
+    } else if (exception && typeof exception === 'object') {
+      const anyErr = exception as any;
+      if (anyErr.message && typeof anyErr.message === 'string') {
+        errorMessage = anyErr.message;
+      } else if (anyErr.code) {
+        errorMessage = `Database error code: ${anyErr.code}`;
+      }
     }
 
-    console.error('API Error Exception:', exception);
+    console.error('API Error Exception Trace:', exception);
 
     response.status(status).json({
       statusCode: status,
