@@ -1,0 +1,146 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+enum BillingCycle {
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  PAUSED
+}
+
+enum Currency {
+  LKR
+  USD
+  EUR
+  GBP
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  name          String
+  passwordHash  String
+  currency      Currency       @default(LKR)
+  savingsGoal   Decimal        @default(0) @db.Decimal(12, 2)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  incomes       Income[]
+  expenses      Expense[]
+  categories    Category[]
+  subscriptions Subscription[]
+  budgets       Budget[]
+
+  @@map("users")
+}
+
+model Category {
+  id            String         @id @default(uuid())
+  userId        String?
+  name          String
+  type          CategoryType
+  icon          String         @default("tag")
+  color         String         @default("#6366f1")
+  isDefault     Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+
+  user          User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expenses      Expense[]
+  incomes       Income[]
+  budgets       Budget[]
+  subscriptions Subscription[]
+
+  @@map("categories")
+}
+
+model Income {
+  id          String    @id @default(uuid())
+  userId      String
+  categoryId  String?
+  amount      Decimal   @db.Decimal(12, 2)
+  source      String
+  description String?
+  date        DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([userId, date])
+  @@map("incomes")
+}
+
+model Expense {
+  id            String   @id @default(uuid())
+  userId        String
+  categoryId    String
+  amount        Decimal  @db.Decimal(12, 2)
+  description   String?
+  paymentMethod String   @default("Cash")
+  date          DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  @@index([userId, date])
+  @@index([userId, categoryId])
+  @@map("expenses")
+}
+
+model Subscription {
+  id              String             @id @default(uuid())
+  userId          String
+  categoryId      String?
+  name            String
+  amount          Decimal            @db.Decimal(12, 2)
+  billingCycle    BillingCycle       @default(MONTHLY)
+  nextPaymentDate DateTime
+  status          SubscriptionStatus @default(ACTIVE)
+  description     String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category        Category?          @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@map("subscriptions")
+}
+
+model Budget {
+  id          String   @id @default(uuid())
+  userId      String
+  categoryId  String
+  amount      Decimal  @db.Decimal(12, 2)
+  month       Int
+  year        Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, categoryId, month, year])
+  @@map("budgets")
+}
