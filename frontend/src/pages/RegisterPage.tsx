@@ -4,6 +4,7 @@ import { Wallet, UserPlus, Lock, Mail, User, DollarSign } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../api/client';
 import { Currency } from '../types';
+import { extractErrorMessage } from '../utils/errors';
 
 export const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export const RegisterPage: React.FC = () => {
       login(res.data.accessToken, res.data.user);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Registration failed. Email may already exist.');
+      setError(extractErrorMessage(err));
     } finally {
       setIsLoading(false);
     }

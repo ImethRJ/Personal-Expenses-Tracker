@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Wallet, LogIn, Lock, Mail } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../api/client';
+import { extractErrorMessage } from '../utils/errors';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const LoginPage: React.FC = () => {
       login(res.data.accessToken, res.data.user);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Invalid email or password');
+      setError(extractErrorMessage(err));
     } finally {
       setIsLoading(false);
     }
