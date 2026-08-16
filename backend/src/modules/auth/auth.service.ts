@@ -6,11 +6,15 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 
+import { GoogleAuthService, GoogleUserProfile } from './google.service';
+import { GoogleLoginDto } from './dto/google-login.dto';
+
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
+    private googleAuthService: GoogleAuthService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -30,6 +34,7 @@ export class AuthService {
         name: registerDto.name,
         email: registerDto.email,
         passwordHash,
+        provider: 'LOCAL',
         currency: registerDto.currency || 'LKR',
       },
       select: {
@@ -59,6 +64,10 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
+    if (!user.passwordHash) {
+      throw new UnauthorizedException('This account was created using Google Sign-In. Please sign in with Google.');
+    }
+
     const isPasswordValid = await bcrypt.compare(loginDto.password, user.passwordHash);
 
     if (!isPasswordValid) {
@@ -67,6 +76,49 @@ export class AuthService {
 
     const token = this.generateToken(user.id, user.email);
 
+    const { passwordHash, ...userWithoutPassword } = user;
+
+    return {
+      user: userWithoutPassword,
+      accessToken: token,
+    };
+  }
+
+  async googleLogin(googleLoginDto: GoogleLoginDto) {
+    const profile = await this.googleAuthService.verifyGoogleToken(googleLoginDto);
+
+    let user = await this.prisma.user.findFirst({
+      where: {
+        OR: [
+          { googleId: profile.googleId },
+          { email: profile.email },
+        ],
+      },
+    });
+
+    if (!user) {
+      user = await this.prisma.user.create({
+        data: {
+          name: profile.name,
+          email: profile.email,
+          googleId: profile.googleId,
+          avatarUrl: profile.avatarUrl,
+          provider: 'GOOGLE',
+          currency: 'LKR',
+        },
+      });
+    } else if (!user.googleId) {
+      user = await this.prisma.user.update({
+        where: { id: user.id },
+        data: {
+          googleId: profile.googleId,
+          ...(profile.avatarUrl && { avatarUrl: profile.avatarUrl }),
+          provider: user.provider || 'GOOGLE',
+        },
+      });
+    }
+
+    const token = this.generateToken(user.id, user.email);
     const { passwordHash, ...userWithoutPassword } = user;
 
     return {

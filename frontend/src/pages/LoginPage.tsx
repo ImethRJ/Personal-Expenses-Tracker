@@ -4,6 +4,7 @@ import { Wallet, LogIn, Lock, Mail } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../api/client';
 import { extractErrorMessage } from '../utils/errors';
+import { GoogleAuthButton } from '../components/auth/GoogleAuthButton';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -45,6 +46,18 @@ export const LoginPage: React.FC = () => {
             {error}
           </div>
         )}
+
+        <GoogleAuthButton
+          onSuccess={() => navigate('/')}
+          onError={(err) => setError(err)}
+        />
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-slate-800 w-full" />
+          <span className="bg-slate-900 px-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider absolute">
+            Or continue with email
+          </span>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

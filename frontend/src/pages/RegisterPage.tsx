@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../api/client';
 import { Currency } from '../types';
 import { extractErrorMessage } from '../utils/errors';
+import { GoogleAuthButton } from '../components/auth/GoogleAuthButton';
 
 export const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -53,6 +54,18 @@ export const RegisterPage: React.FC = () => {
             {error}
           </div>
         )}
+
+        <GoogleAuthButton
+          onSuccess={() => navigate('/')}
+          onError={(err) => setError(err)}
+        />
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-slate-800 w-full" />
+          <span className="bg-slate-900 px-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider absolute">
+            Or register with email
+          </span>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
