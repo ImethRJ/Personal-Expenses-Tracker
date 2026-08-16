@@ -102,7 +102,7 @@ export const AddEditExpenseModal: React.FC<AddEditExpenseModalProps> = ({
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="e.g. 50.00"
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -114,7 +114,7 @@ export const AddEditExpenseModal: React.FC<AddEditExpenseModalProps> = ({
             required
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           >
             <option value="" disabled>Select Category</option>
             {expenseCategories.map((cat) => (
@@ -132,7 +132,7 @@ export const AddEditExpenseModal: React.FC<AddEditExpenseModalProps> = ({
           <select
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           >
             {paymentMethods.map((pm) => (
               <option key={pm} value={pm}>
@@ -151,7 +151,7 @@ export const AddEditExpenseModal: React.FC<AddEditExpenseModalProps> = ({
             required
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -164,7 +164,7 @@ export const AddEditExpenseModal: React.FC<AddEditExpenseModalProps> = ({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="e.g. Lunch at diner, Gas refill..."
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -172,18 +172,19 @@ export const AddEditExpenseModal: React.FC<AddEditExpenseModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white rounded-xl transition-colors"
+            className="px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white rounded-xl active:scale-95 transition-all min-h-[44px]"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-5 py-2 text-sm font-medium bg-rose-600 hover:bg-rose-500 text-white rounded-xl shadow-glow-red transition-all"
+            className="px-5 py-2.5 text-sm font-medium bg-rose-600 hover:bg-rose-500 text-white rounded-xl shadow-glow-red active:scale-95 transition-all min-h-[44px]"
           >
             {isSubmitting ? 'Saving...' : initialData ? 'Update Expense' : 'Save Expense'}
           </button>
         </div>
+
       </form>
     </Modal>
   );

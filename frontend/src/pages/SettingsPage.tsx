@@ -30,14 +30,14 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
-          <Settings className="w-6 h-6 text-indigo-400" />
+        <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+          <Settings className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400" />
           Account & Preferences
         </h2>
-        <p className="text-sm text-slate-400 mt-0.5">Customize your preferred currency, savings goal, and profile</p>
+        <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Customize your preferred currency, savings goal, and profile</p>
       </div>
 
-      <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-3xl shadow-xl">
+      <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-xl">
         <form onSubmit={handleSubmit} className="space-y-5">
           {message && (
             <div className="p-3 text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl">
@@ -56,7 +56,7 @@ export const SettingsPage: React.FC = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
               />
             </div>
           </div>
@@ -69,7 +69,7 @@ export const SettingsPage: React.FC = () => {
               type="email"
               disabled
               value={user?.email || ''}
-              className="w-full px-4 py-2.5 bg-slate-800/50 border border-slate-800 rounded-xl text-slate-400 cursor-not-allowed"
+              className="w-full px-4 py-2.5 bg-slate-800/50 border border-slate-800 rounded-xl text-slate-400 cursor-not-allowed text-base sm:text-sm"
             />
           </div>
 
@@ -82,7 +82,7 @@ export const SettingsPage: React.FC = () => {
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value as Currency)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
               >
                 <option value="LKR">LKR (Sri Lankan Rupees - Rs.)</option>
                 <option value="USD">USD (US Dollars - $)</option>
@@ -104,7 +104,7 @@ export const SettingsPage: React.FC = () => {
                 value={savingsGoal}
                 onChange={(e) => setSavingsGoal(e.target.value)}
                 placeholder="e.g. 500.00"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
               />
             </div>
           </div>
@@ -113,7 +113,7 @@ export const SettingsPage: React.FC = () => {
             <button
               type="submit"
               disabled={isSaving}
-              className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm rounded-xl shadow-glow-brand transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 sm:py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm rounded-xl shadow-glow-brand active:scale-95 transition-all min-h-[44px]"
             >
               <Save className="w-4 h-4" />
               {isSaving ? 'Saving...' : 'Save Settings'}
@@ -124,3 +124,4 @@ export const SettingsPage: React.FC = () => {
     </div>
   );
 };
+

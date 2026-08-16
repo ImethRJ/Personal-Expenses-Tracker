@@ -38,47 +38,48 @@ export const AnalyticsPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
-          <PieChart className="w-6 h-6 text-indigo-400" />
+        <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+          <PieChart className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400" />
           Financial Analytics & AI Insights
         </h2>
-        <p className="text-sm text-slate-400 mt-0.5">Deep analytical insights derived from actual transaction history</p>
+        <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Deep analytical insights derived from actual transaction history</p>
       </div>
 
       {/* Financial Insights Banner */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-bold text-white flex items-center gap-2">
-          <Lightbulb className="w-5 h-5 text-amber-400" />
+      <div className="space-y-3 sm:space-y-4">
+        <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+          <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
           Automated Financial Observations
         </h3>
         <InsightsPanel insights={insightsData} />
       </div>
 
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
         {/* Net Balance Trend Line Chart */}
-        <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-3xl shadow-xl">
-          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-            <LineIcon className="w-5 h-5 text-indigo-400" />
+        <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-xl">
+          <h3 className="text-base sm:text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <LineIcon className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />
             Net Balance Trend (6 Months)
           </h3>
           <BalanceTrendLineChart data={trendData} currency={user?.currency || 'LKR'} />
         </div>
 
         {/* Category Breakdown Donut */}
-        <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-3xl shadow-xl">
-          <h3 className="text-lg font-bold text-white mb-4">Category Outflow Ratio</h3>
+        <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-xl">
+          <h3 className="text-base sm:text-lg font-bold text-white mb-4">Category Outflow Ratio</h3>
           <ExpenseDonutChart data={categoryData} currency={user?.currency || 'LKR'} />
         </div>
       </div>
 
       {/* Income vs Expenses Bar Chart */}
-      <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-3xl shadow-xl">
-        <h3 className="text-lg font-bold text-white mb-4">Historical Income vs Expense Comparison</h3>
+      <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-xl">
+        <h3 className="text-base sm:text-lg font-bold text-white mb-4">Historical Income vs Expense Comparison</h3>
         <IncomeExpenseBarChart data={trendData} currency={user?.currency || 'LKR'} />
       </div>
     </div>
   );
+
 };

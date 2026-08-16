@@ -49,20 +49,21 @@ export const BudgetsPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
-            <Target className="w-6 h-6 text-amber-400" />
+          <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <Target className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
             Budget Management
           </h2>
-          <p className="text-sm text-slate-400 mt-0.5">Define category spending targets and monitor over-budget alerts</p>
+          <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Define category spending targets and monitor over-budget alerts</p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl shadow-glow-brand transition-all"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl shadow-glow-brand active:scale-95 transition-all min-h-[44px]"
         >
           <Plus className="w-4 h-4" />
           Set Budget Target
         </button>
       </div>
+
 
       {/* Budget Bars Grid */}
       {isLoading ? (

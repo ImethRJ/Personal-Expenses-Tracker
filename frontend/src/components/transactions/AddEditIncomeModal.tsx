@@ -93,7 +93,7 @@ export const AddEditIncomeModal: React.FC<AddEditIncomeModalProps> = ({
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="e.g. 2500.00"
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -107,7 +107,7 @@ export const AddEditIncomeModal: React.FC<AddEditIncomeModalProps> = ({
             value={source}
             onChange={(e) => setSource(e.target.value)}
             placeholder="e.g. Monthly Salary, Freelance Client"
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -118,7 +118,7 @@ export const AddEditIncomeModal: React.FC<AddEditIncomeModalProps> = ({
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           >
             <option value="">Select Category (Optional)</option>
             {incomeCategories.map((cat) => (
@@ -138,7 +138,7 @@ export const AddEditIncomeModal: React.FC<AddEditIncomeModalProps> = ({
             required
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -151,7 +151,7 @@ export const AddEditIncomeModal: React.FC<AddEditIncomeModalProps> = ({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Optional notes or details..."
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -159,18 +159,19 @@ export const AddEditIncomeModal: React.FC<AddEditIncomeModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white rounded-xl transition-colors"
+            className="px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white rounded-xl active:scale-95 transition-all min-h-[44px]"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-5 py-2 text-sm font-medium bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-glow-green transition-all"
+            className="px-5 py-2.5 text-sm font-medium bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-glow-green active:scale-95 transition-all min-h-[44px]"
           >
             {isSubmitting ? 'Saving...' : initialData ? 'Update Income' : 'Save Income'}
           </button>
         </div>
+
       </form>
     </Modal>
   );

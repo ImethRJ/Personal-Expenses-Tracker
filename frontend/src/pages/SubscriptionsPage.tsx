@@ -62,18 +62,18 @@ export const SubscriptionsPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
-            <RefreshCw className="w-6 h-6 text-purple-400" />
+          <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <RefreshCw className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
             Recurring Subscriptions
           </h2>
-          <p className="text-sm text-slate-400 mt-0.5">Manage recurring SaaS, streaming, and utility memberships</p>
+          <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Manage recurring SaaS, streaming, and utility memberships</p>
         </div>
         <button
           onClick={() => {
             setEditingSub(null);
             setIsModalOpen(true);
           }}
-          className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl shadow-glow-brand transition-all"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl shadow-glow-brand active:scale-95 transition-all min-h-[44px]"
         >
           <Plus className="w-4 h-4" />
           Add Subscription
@@ -81,23 +81,23 @@ export const SubscriptionsPage: React.FC = () => {
       </div>
 
       {/* Subscription Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-2xl flex items-center justify-between shadow-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl flex items-center justify-between shadow-lg">
           <div>
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
               Monthly Recurring Outflow
             </span>
-            <p className="text-3xl font-extrabold text-purple-400 mt-1">
+            <p className="text-2xl sm:text-3xl font-extrabold text-purple-400 mt-1">
               {formatCurrency(summary.totalMonthlyCost, user?.currency || 'LKR')}
             </p>
           </div>
-          <div className="p-3 bg-purple-500/10 text-purple-400 rounded-xl">
-            <RefreshCw className="w-6 h-6" />
+          <div className="p-2.5 sm:p-3 bg-purple-500/10 text-purple-400 rounded-xl">
+            <RefreshCw className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
         </div>
 
-        <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-2xl shadow-lg">
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+        <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl shadow-lg">
+          <span className="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">
             Upcoming Renewals
           </span>
           {summary.upcomingPayments.length === 0 ? (
@@ -106,7 +106,7 @@ export const SubscriptionsPage: React.FC = () => {
             <div className="space-y-1.5">
               {summary.upcomingPayments.slice(0, 3).map((up: Subscription) => (
                 <div key={up.id} className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-white">{up.name}</span>
+                  <span className="font-semibold text-white truncate max-w-[150px]">{up.name}</span>
                   <span className="text-slate-400 font-medium">{formatDate(up.nextPaymentDate)}</span>
                 </div>
               ))}
@@ -114,6 +114,7 @@ export const SubscriptionsPage: React.FC = () => {
           )}
         </div>
       </div>
+
 
       {/* Subscription Grid */}
       {isLoading ? (

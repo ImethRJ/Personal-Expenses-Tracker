@@ -62,18 +62,18 @@ export const IncomesPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
-            <TrendingUp className="w-6 h-6 text-emerald-400" />
+          <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
             Income Management
           </h2>
-          <p className="text-sm text-slate-400 mt-0.5">Record and monitor all earnings and salary entries</p>
+          <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Record and monitor all earnings and salary entries</p>
         </div>
         <button
           onClick={() => {
             setEditingIncome(null);
             setIsModalOpen(true);
           }}
-          className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-glow-green transition-all"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-glow-green active:scale-95 transition-all min-h-[44px]"
         >
           <Plus className="w-4 h-4" />
           Add Income Record
@@ -81,14 +81,14 @@ export const IncomesPage: React.FC = () => {
       </div>
 
       {/* Income Summary Banner */}
-      <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-2xl flex items-center justify-between">
+      <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Monthly Income</span>
-          <p className="text-3xl font-extrabold text-emerald-400 mt-1">
+          <span className="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Monthly Income</span>
+          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">
             {formatCurrency(totalIncome, user?.currency || 'LKR')}
           </p>
         </div>
-        <span className="text-sm text-slate-400 font-medium">
+        <span className="text-xs sm:text-sm text-slate-400 font-medium">
           {incomes.length} Record{incomes.length !== 1 ? 's' : ''} logged
         </span>
       </div>
@@ -101,15 +101,15 @@ export const IncomesPage: React.FC = () => {
           No income records logged for this month.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {incomes.map((inc) => (
-            <div key={inc.id} className="p-5 bg-slate-900/90 border border-slate-800 rounded-2xl shadow-lg flex flex-col justify-between">
+            <div key={inc.id} className="p-4 sm:p-5 bg-slate-900/90 border border-slate-800 rounded-2xl shadow-lg flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-bold text-white text-base">{inc.source}</h3>
                   <span className="text-xs text-slate-400 font-medium">{formatDate(inc.date)}</span>
                 </div>
-                <p className="text-2xl font-extrabold text-emerald-400 my-2">
+                <p className="text-xl sm:text-2xl font-extrabold text-emerald-400 my-2">
                   +{formatCurrency(inc.amount, user?.currency || 'LKR')}
                 </p>
                 {inc.description && <p className="text-xs text-slate-400 mt-1">{inc.description}</p>}
@@ -121,7 +121,7 @@ export const IncomesPage: React.FC = () => {
                     setEditingIncome(inc);
                     setIsModalOpen(true);
                   }}
-                  className="p-1.5 text-slate-400 hover:text-indigo-400"
+                  className="p-2 text-slate-400 hover:text-indigo-400 rounded-lg active:scale-95 transition-all min-w-[36px] min-h-[36px] flex items-center justify-center"
                 >
                   <Edit2 className="w-4 h-4" />
                 </button>
@@ -129,7 +129,7 @@ export const IncomesPage: React.FC = () => {
                   onClick={() => {
                     if (confirm('Delete this income record?')) deleteMutation.mutate(inc.id);
                   }}
-                  className="p-1.5 text-slate-400 hover:text-rose-400"
+                  className="p-2 text-slate-400 hover:text-rose-400 rounded-lg active:scale-95 transition-all min-w-[36px] min-h-[36px] flex items-center justify-center"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -138,6 +138,7 @@ export const IncomesPage: React.FC = () => {
           ))}
         </div>
       )}
+
 
       <AddEditIncomeModal
         isOpen={isModalOpen}

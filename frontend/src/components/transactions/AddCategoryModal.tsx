@@ -59,7 +59,7 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({ isOpen, onCl
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Gym & Fitness, Pet Care"
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -71,7 +71,7 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({ isOpen, onCl
             <button
               type="button"
               onClick={() => setType('EXPENSE')}
-              className={`py-2 px-4 rounded-xl border text-sm font-semibold transition-all ${
+              className={`py-2.5 px-4 rounded-xl border text-sm font-semibold active:scale-95 transition-all min-h-[44px] ${
                 type === 'EXPENSE'
                   ? 'bg-rose-500/20 border-rose-500 text-rose-400'
                   : 'bg-slate-800 border-slate-700 text-slate-400'
@@ -82,7 +82,7 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({ isOpen, onCl
             <button
               type="button"
               onClick={() => setType('INCOME')}
-              className={`py-2 px-4 rounded-xl border text-sm font-semibold transition-all ${
+              className={`py-2.5 px-4 rounded-xl border text-sm font-semibold active:scale-95 transition-all min-h-[44px] ${
                 type === 'INCOME'
                   ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400'
                   : 'bg-slate-800 border-slate-700 text-slate-400'
@@ -103,7 +103,7 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({ isOpen, onCl
                 key={c}
                 type="button"
                 onClick={() => setColor(c)}
-                className={`w-8 h-8 rounded-full border-2 transition-transform ${
+                className={`w-9 h-9 rounded-full border-2 transition-transform active:scale-95 ${
                   color === c ? 'border-white scale-110' : 'border-transparent hover:scale-105'
                 }`}
                 style={{ backgroundColor: c }}
@@ -116,18 +116,19 @@ export const AddCategoryModal: React.FC<AddCategoryModalProps> = ({ isOpen, onCl
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white rounded-xl transition-colors"
+            className="px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white rounded-xl active:scale-95 transition-all min-h-[44px]"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-5 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-glow-brand transition-all"
+            className="px-5 py-2.5 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-glow-brand active:scale-95 transition-all min-h-[44px]"
           >
             {isSubmitting ? 'Creating...' : 'Create Category'}
           </button>
         </div>
+
       </form>
     </Modal>
   );

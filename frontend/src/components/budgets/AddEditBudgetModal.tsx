@@ -77,7 +77,7 @@ export const AddEditBudgetModal: React.FC<AddEditBudgetModalProps> = ({
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           >
             {expenseCategories.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -98,7 +98,7 @@ export const AddEditBudgetModal: React.FC<AddEditBudgetModalProps> = ({
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="e.g. 400.00"
-            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 text-base sm:text-sm"
           />
         </div>
 
@@ -106,18 +106,19 @@ export const AddEditBudgetModal: React.FC<AddEditBudgetModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white rounded-xl transition-colors"
+            className="px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white rounded-xl active:scale-95 transition-all min-h-[44px]"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-5 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-glow-brand transition-all"
+            className="px-5 py-2.5 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-glow-brand active:scale-95 transition-all min-h-[44px]"
           >
             {isSubmitting ? 'Saving Target...' : 'Save Budget Target'}
           </button>
         </div>
+
       </form>
     </Modal>
   );

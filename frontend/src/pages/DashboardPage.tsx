@@ -138,22 +138,22 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Top Banner & Quick Action Buttons */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-slate-800 rounded-3xl shadow-xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-6 bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-xl">
         <div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
             Welcome back, {user?.name || 'User'} 👋
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Real-time balance status for <strong className="text-indigo-400 font-semibold">{dashboardData.month}/{dashboardData.year}</strong>
           </p>
         </div>
-        <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
           <button
             onClick={() => {
               setEditingTransaction(null);
               setIsIncomeModalOpen(true);
             }}
-            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-glow-green transition-all"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-glow-green active:scale-95 transition-all min-h-[44px]"
           >
             <TrendingUp className="w-4 h-4" />
             Add Income
@@ -163,7 +163,7 @@ export const DashboardPage: React.FC = () => {
               setEditingTransaction(null);
               setIsExpenseModalOpen(true);
             }}
-            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white text-sm font-semibold rounded-xl shadow-glow-red transition-all"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 bg-rose-600 hover:bg-rose-500 text-white text-sm font-semibold rounded-xl shadow-glow-red active:scale-95 transition-all min-h-[44px]"
           >
             <TrendingDown className="w-4 h-4" />
             Add Expense
@@ -175,16 +175,16 @@ export const DashboardPage: React.FC = () => {
       <SummaryCards summary={dashboardData.summary} currency={dashboardData.currency} />
 
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
         {/* Income vs Expenses Bar Chart */}
-        <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-3xl shadow-xl">
-          <h3 className="text-lg font-bold text-white mb-4">Monthly Income vs Expenses</h3>
+        <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-xl">
+          <h3 className="text-base sm:text-lg font-bold text-white mb-4">Monthly Income vs Expenses</h3>
           <IncomeExpenseBarChart data={trendData || []} currency={dashboardData.currency} />
         </div>
 
         {/* Expense Breakdown Donut Chart */}
-        <div className="p-6 bg-slate-900/90 border border-slate-800 rounded-3xl shadow-xl">
-          <h3 className="text-lg font-bold text-white mb-4">Expense Breakdown by Category</h3>
+        <div className="p-4 sm:p-6 bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-xl">
+          <h3 className="text-base sm:text-lg font-bold text-white mb-4">Expense Breakdown by Category</h3>
           <ExpenseDonutChart data={dashboardData.categoryBreakdown} currency={dashboardData.currency} />
         </div>
       </div>
@@ -192,8 +192,8 @@ export const DashboardPage: React.FC = () => {
       {/* Recent Transactions Table */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-extrabold text-white tracking-tight">Recent Transactions</h3>
-          <a href="/transactions" className="text-sm font-semibold text-indigo-400 hover:text-indigo-300">
+          <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">Recent Transactions</h3>
+          <a href="/transactions" className="text-xs sm:text-sm font-semibold text-indigo-400 hover:text-indigo-300">
             View All →
           </a>
         </div>
@@ -204,6 +204,7 @@ export const DashboardPage: React.FC = () => {
           onDelete={handleDelete}
         />
       </div>
+
 
       {/* Income Modal */}
       <AddEditIncomeModal
